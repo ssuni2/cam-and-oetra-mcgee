@@ -1,8 +1,66 @@
-.vertical-line
-{
-    width: 2px;
-    background-color: black;
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body {
+    font-family: Open Sans, Arial, sans-serif;
+}
+
+#emails {
+    position: fixed;
+    left: 0%;
     height: 100%;
+    top: 0%;
+    border-right: 2px solid black;
+    width: 33%;
+    overflow: scroll;
+}
+
+.emailPreview span {
+    padding: 10px;
+}
+.emailPreview {
+    margin: 10px;
+    border: 2px solid grey;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration: .1s;
+    padding-top: 5px;
+}
+.emailPreview:hover {
+    background: lightgrey;
+    transition-duration: .1s;
+}
+.emailPreview span {
+    max-height: 20px;
+    overflow-y: hidden;
+}
+
+.content {
+	display: inline-block;
+}
+
+.emailView {
+    width: calc(50% - 20px);
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+    height: calc(100% - 2*10px);
+}
+.emailCompose {
+    width: calc(50% - 20px);
+    border-radius: 10px;
+    height: calc(100% - 2*10px);
+    position: absolute; 
+    top: 10px;
+    right: 10px;
+    border: 1px solid black;
+    font-family: Open Sans, Arial, sans-serif;
+    resize: none;
+    padding: 5px;
+}
+.emailCompose:focus {
+    outline: none;
+}
+.emailWindow {
     position: fixed;
     top: 0;
     bottom: 0;
