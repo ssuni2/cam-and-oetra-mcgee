@@ -18,6 +18,7 @@ body {
 .emailPreview span {
     padding: 10px;
 }
+
 .emailPreview {
     margin: 10px;
     border: 2px solid grey;
@@ -26,17 +27,19 @@ body {
     transition-duration: .1s;
     padding-top: 5px;
 }
+
 .emailPreview:hover {
     background: lightgrey;
     transition-duration: .1s;
 }
+
 .emailPreview span {
     max-height: 20px;
     overflow-y: hidden;
 }
 
 .content {
-	display: inline-block;
+    display: inline-block;
 }
 
 .emailView {
@@ -46,22 +49,25 @@ body {
     border-radius: 10px;
     height: calc(100% - 2*10px);
 }
+
 .emailCompose {
     width: calc(50% - 20px);
     border-radius: 10px;
     height: calc(100% - 2*10px);
-    position: absolute; 
-    top: 10px;
-    right: 10px;
+    /* position: absolute;  Remove this line */
+    /* top: 10px; Remove this line */
+    /* right: 10px; Remove this line */
     border: 1px solid black;
     font-family: Open Sans, Arial, sans-serif;
     resize: none;
     padding: 5px;
 }
+
 .emailCompose:focus {
     outline: none;
 }
-.emailWindow {
+
+/* .emailWindow {
     position: fixed;
     left: 15%;
     height: 75%;
@@ -71,11 +77,12 @@ body {
     border: 1px solid black;
     border-radius: 10px;
     width: 70%;
-}
+} */
 
-.has-modal > *:not(.emailWindow) {
-    filter: blur(1px);
-    pointer-events: none;
+.has-modal>*:not(.emailWindow) {
+    /* filter: blur(1px); */
+    pointer-events: auto;
+    /* Set pointer-events to auto for elements other than .emailWindow */
 }
 
 .emailWindow {
@@ -84,22 +91,25 @@ body {
 }
 
 @keyframes dropdown {
-    from {top: 0px;}
+    from {
+        top: 0px;
+    }
 }
 
 .close {
-	position: absolute;
-	top: -15px;
+    position: absolute;
+    top: -15px;
     right: -15px;
-	height: 30px;
-	width: 30px;
-	border-radius: 20px;
-	border: none;
-	background: lightgrey;
-	cursor: pointer;
+    height: 30px;
+    width: 30px;
+    border-radius: 20px;
+    border: none;
+    background: lightgrey;
+    cursor: pointer;
     font-size: 1.2em;
     transition-duration: .1s;
 }
+
 .close:hover {
     background: grey;
     transition-duration: .1s;
