@@ -11,7 +11,8 @@ body {
     top: 0%;
     border-right: 2px solid black;
     width: 33%;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .emailPreview span {
@@ -62,7 +63,44 @@ body {
 }
 .emailWindow {
     position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 66%;
+    left: 15%;
+    height: 75%;
+    top: 12.5%;
+    background: white;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 70%;
+}
+
+.has-modal > *:not(.emailWindow) {
+    filter: blur(1px);
+    pointer-events: none;
+}
+
+.emailWindow {
+    animation-name: dropdown;
+    animation-duration: 0.2s;
+}
+
+@keyframes dropdown {
+    from {top: 0px;}
+}
+
+.close {
+	position: absolute;
+	top: -15px;
+    right: -15px;
+	height: 30px;
+	width: 30px;
+	border-radius: 20px;
+	border: none;
+	background: lightgrey;
+	cursor: pointer;
+    font-size: 1.2em;
+    transition-duration: .1s;
+}
+.close:hover {
+    background: grey;
+    transition-duration: .1s;
 }
