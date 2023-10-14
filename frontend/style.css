@@ -47,16 +47,16 @@ body {
     border: 1px solid black;
     padding: 10px;
     border-radius: 10px;
-    height: calc(100% - 2*10px);
+    height: calc(100% - 2*20px);
 }
 
 .emailCompose {
     width: calc(50% - 20px);
     border-radius: 10px;
-    height: calc(100% - 2*10px);
-    /* position: absolute;  Remove this line */
-    /* top: 10px; Remove this line */
-    /* right: 10px; Remove this line */
+    height: calc(100% - 2*20px - 30px - 10px); /* Accounts for height and margin of send button */
+    position: absolute;
+    top: 10px;
+    right: 10px; 
     border: 1px solid black;
     font-family: Open Sans, Arial, sans-serif;
     resize: none;
@@ -66,51 +66,80 @@ body {
 .emailCompose:focus {
     outline: none;
 }
-
-/* .emailWindow {
-    position: fixed;
-    left: 15%;
-    height: 75%;
-    top: 12.5%;
-    background: white;
-    padding: 10px;
-    border: 1px solid black;
-    border-radius: 10px;
-    width: 70%;
-} */
-
-.has-modal>*:not(.emailWindow) {
-    /* filter: blur(1px); */
-    pointer-events: auto;
-    /* Set pointer-events to auto for elements other than .emailWindow */
+.emailCompose:disabled {
+    filter: blur(1px);
 }
 
 .emailWindow {
-    animation-name: dropdown;
-    animation-duration: 0.2s;
-}
-
-@keyframes dropdown {
-    from {
-        top: 0px;
-    }
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	width: 65%;
+	height: 100%;
+	background-color: white;
+	padding: 10px;
+	border: 1px solid black;
+	border-radius: 15px;
 }
 
 .close {
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    height: 30px;
-    width: 30px;
-    border-radius: 20px;
-    border: none;
-    background: lightgrey;
-    cursor: pointer;
-    font-size: 1.2em;
-    transition-duration: .1s;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	height: 30px;
+	width: 30px;
+	border-radius: 15px;
+	border: none;
+	background: lightgrey;
+	cursor: pointer;
+	font-size: 1.2em;
+	transition-duration: .1s;
 }
 
 .close:hover {
     background: grey;
     transition-duration: .1s;
+}
+
+.send {
+    position: absolute;
+    right: 10px;
+    bottom: 30px;
+    height: 30px;
+    width: calc(50% - 20px);
+    background: #6eaa69;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    transition-duration: 0.5s;
+}
+
+.send:hover {
+    background: #5d8d59;
+    transition-duration: 0.5s;
+}
+
+.overlay {
+	position: absolute;
+	right: 10%;
+	height: 50px;
+	width: calc(30% - 20px);
+	background: #6eaa69;
+	cursor: pointer;
+	border-radius: 5px;
+	border: none;
+	transition-duration: 0.5s;
+}
+
+.overlay.short {
+    top: calc((100% - 2*20px - 30px - 10px) * 0.2);
+}
+.overlay.long {
+    top: calc((100% - 2*20px - 30px - 10px) * 0.4);
+}
+.overlay.followup {
+    top: calc((100% - 2*20px - 30px - 10px) * 0.6);
+}
+.overlay.writeOwn {
+    top: calc((100% - 2*20px - 30px - 10px) * 0.8);
 }
