@@ -38,15 +38,20 @@ function createEmailWindow(el) {
   div.className = "emailWindow";
 
   div.innerHTML = `
-  <div class="emailView">
-    <span>From: </span><a class="sender"></a> 
-    <br>
-    <span class="subject"></span>
-    <hr>
-    <span class="content"></span>
-  </div>
-  <textarea class="emailCompose" placeholder="Compose a reply..."></textarea>
-  <button class="close">&#10006</button>
+    <div class="emailView">
+      <span>From: </span><a class="sender"></a> 
+      <br>
+      <span class="subject"></span>
+      <hr>
+      <span class="content"></span>
+    </div>
+    <textarea class="emailCompose" placeholder="Compose a reply..." disabled></textarea>
+    <button class="overlay short">Short response</button>
+    <button class="overlay long">Long response</button>
+    <button class="overlay followup">Followup response</button>
+    <button class="overlay writeOwn">Write my own response</button>
+    <button class="send">Send</button>
+    <button class="close">&#10006</button>
   `;
 
   let [sender, subject, content] = [
@@ -57,7 +62,32 @@ function createEmailWindow(el) {
   div.querySelector(".sender").innerText = sender;
   div.querySelector(".sender").href = "mailto:" + sender;
   div.querySelector(".subject").innerText = "Subject: " + subject;
+
   document.body.className = "has-modal";
+
+  let composeBox = div.querySelector(".emailCompose");
+
+  let generateFunctions = {
+    short() {
+      composeBox.value = "<Short generated response>";
+    },
+    long() {
+      composeBox.value = "<Long generated response>";
+    },
+    followup() {
+      composeBox.value = "<Generated followup response>";
+    },
+    writeOwn() {},
+  };
+
+  div.querySelectorAll(".overlay").forEach(function(el) {
+    el.addEventListener("click", function() {
+      composeBox.disabled = false;
+      div.querySelectorAll(".overlay").forEach(el => div.removeChild(el));
+      composeBox.focus();
+      generateFunctions[el.className.split(" ").filter(name => ["short", "long", "followup", "writeOwn"].includes(name))[0]]();
+    });
+  });
 
   emailWindow = div;
   document.body.append(div);
@@ -66,5 +96,6 @@ function createEmailWindow(el) {
     document.body.removeChild(emailWindow);
     emailWindow = null;
   }
+
   div.querySelector(".close").onclick = remove;
 }
