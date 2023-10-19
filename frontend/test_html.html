@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Load the Gmail API client library -->
+  <script async defer src="https://apis.google.com/js/api.js"
+    onload="this.onload=function(){};handleClientLoad()"
+    onreadystatechange="if (this.readyState === 'complete') this.onload()">
+  </script>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Composer</title>
+</head>
+<body>
+  <h1>Email Composer</h1>
+  
+  <form id="composeForm">
+    <label for="to">To:</label>
+    <input type="text" id="to" name="to" required><br>
+
+    <label for="subject">Subject:</label>
+    <input type="text" id="subject" name="subject" required><br>
+
+    <!-- Assuming your compose box has a class "emailcompose" -->
+    <label for="body">Body:</label>
+    <textarea class="emailcompose" id="body" name="body" rows="4" cols="50" required></textarea><br>
+
+    <button type="button" onclick="sendEmail()">Send Email</button>
+  </form>
+
+  <script>
+    const credentials = {
+      installed: {
+        client_id: "551956290995-3ivu24vhp2lnu2e25fr17nn6poipb741.apps.googleusercontent.com",
+        client_secret: "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",
+        redirect_uris: ["'http://localhost'"],
+      }
+    };
+
+    const oAuth2Client = new google.auth.OAuth2(
+      credentials.installed.client_id,
+      credentials.installed.client_secret,
+      credentials.installed.redirect_uris[0]
+    );
+
+    // Set the access token
+    oAuth2Client.setCredentials({
+      access_token: "ya29.a0AfB_byDu8a2Whxp9eI8l3gBOfp0HLid85LQZH6dqt2TJLrfOtTPm0TvOKcfoKGZQCqkCFZdVpv3ypVkh6S5lfuehPCrkU-yLxypp2yF95N3ZnUh8BNU9LpzNnok4yxLaVkxmmhK1oxlz35uocRbvQGr7wrpdIUGEKfhDaCgYKAegSARISFQGOcNnCP2SrnQJlnKSSGqUQanfQEw0171",
+      refresh_token: "1//01IA47v-457cXCgYIARAAGAESNwF-L9Ir2lpzkJaRi7qF5dhlCiVZRMQdPAvrdsb-aSrf0AjPzv8A05HDi8Rt-h7FtqMOw778Iek",
+    });
+ 
+    async function sendEmail() {
+      const to = document.getElementById('to').value;
+      const subject = document.getElementById('subject').value;
+
+      // Use querySelector to select the element with the class "emailcompose"
+      const composeBox = document.querySelector('.emailcompose');
+
+      // Get the value of the compose box
+      const body = composeBox.value;
+
+      // Construct MIME message
+      const mimeMessage = [
+        'To: ' + to,
+        'Subject: ' + subject,
+        'Content-Type: text/plain; charset="UTF-8"',
+        '',
+        body,
+      ].join('\r\n');
+
+      // Convert MIME message to base64
+      const base64EncodedEmail = btoa(mimeMessage);
+
+      try {
+        // Use Gmail API to send the email
+        const res = await gapi.client.gmail.users.messages.send({
+          userId: 'me',
+          requestBody: {
+            raw: base64EncodedEmail,
+          },
+        });
+
+        console.log('Email sent:', res.result);
+      } catch (error) {
+        console.error('Error sending email:', error.message);
+      }
+    }
+  </script>
+
+
+</body>
+</html>
