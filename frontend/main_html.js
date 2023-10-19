@@ -30,14 +30,14 @@ function addEmail(from, date, subject, content) {
   emails.insertBefore(el, emails.querySelector(".emailPreview")?.parentElement);
 }
 
-addEmail("fanNo1@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("fanNo2@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("fanNo3@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("fanNo4@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("fanNo5@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("fanNo6@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("fanNo7@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("fanNo8@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
 
 
 let emailWindow = null;
@@ -59,6 +59,7 @@ function createEmailWindow(el) {
     <button class="overlay followup">Followup response</button>
     <button class="overlay writeOwn">Write my own response</button>
     <button class="send">Send</button>
+      <button type="button" onclick="sendEmail()">Send Email</button>
     <button class="close">&#10006</button>
   `;
 
