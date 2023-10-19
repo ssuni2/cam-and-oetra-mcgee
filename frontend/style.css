@@ -21,11 +21,15 @@ body {
 
 .emailPreview {
     margin: 10px;
-    border: 2px solid grey;
+    border: 2px solid rgb(0, 0, 0);
     border-radius: 5px;
     cursor: pointer;
     transition-duration: .1s;
     padding-top: 5px;
+    color: #ffffff
+    background-color: #f0f0f0; /* Set background color */
+    /* background-image: url('your-image-url.jpg'); Set background image */
+
 }
 
 .emailPreview:hover {
@@ -48,6 +52,8 @@ body {
     padding: 10px;
     border-radius: 10px;
     height: calc(100% - 2*20px);
+        color: #c72323
+
 }
 
 .emailCompose {
@@ -57,7 +63,7 @@ body {
     position: absolute;
     top: 10px;
     right: 10px; 
-    background-color: #1bd3d3;
+    background-color: #9BBFF4;
     border: 1px solid black;
     font-family: Open Sans, Arial, sans-serif;
     resize: none;
@@ -77,10 +83,13 @@ body {
 	right: 0px;
 	width: 65%;
 	height: 100%;
-	background-color: #1bd3d3;
+	background-color: #A7CDF2;
 	padding: 10px;
 	border: 1px solid black;
 	border-radius: 15px;
+    p {
+        color: red;
+    }
 }
 
 .close {
