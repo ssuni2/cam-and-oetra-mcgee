@@ -15,21 +15,29 @@ function emailElement(from, date, subject, content) {
 
 function addEmail(from, date, subject, content) {
   let el = emailElement(from, date, subject, content);
-  el.addEventListener("click", function() {
+  el.addEventListener("click", function () {
+    // Close existing email window if open
+    if (emailWindow) {
+      document.body.classList.remove("has-modal");
+      document.body.removeChild(emailWindow);
+      emailWindow = null;
+    }
+
     createEmailWindow(el);
   });
+
   let emails = document.querySelector("#emails");
   emails.insertBefore(el, emails.querySelector(".emailPreview")?.parentElement);
 }
 
-addEmail("fanNo1@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("fanNo2@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("fanNo3@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("fanNo4@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("fanNo5@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("fanNo6@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("fanNo7@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("fanNo8@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
 
 
 let emailWindow = null;
@@ -51,6 +59,7 @@ function createEmailWindow(el) {
     <button class="overlay followup">Followup response</button>
     <button class="overlay writeOwn">Write my own response</button>
     <button class="send">Send</button>
+      <button type="button" onclick="sendEmail()">Send Email</button>
     <button class="close">&#10006</button>
   `;
 
@@ -90,7 +99,8 @@ function createEmailWindow(el) {
   });
 
   emailWindow = div;
-  document.body.append(div);
+  document.body.appendChild(div);
+
   function remove() {
     document.body.classList.remove("has-modal");
     document.body.removeChild(emailWindow);

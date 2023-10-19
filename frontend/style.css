@@ -11,31 +11,39 @@ body {
     top: 0%;
     border-right: 2px solid black;
     width: 33%;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .emailPreview span {
     padding: 10px;
 }
+
 .emailPreview {
     margin: 10px;
-    border: 2px solid grey;
+    border: 2px solid rgb(0, 0, 0);
     border-radius: 5px;
     cursor: pointer;
     transition-duration: .1s;
     padding-top: 5px;
+    color: #ffffff;
+    background-color: #217892; /* Set background color */
+    /* background-image: url('your-image-url.jpg'); Set background image */
+
 }
+
 .emailPreview:hover {
     background: lightgrey;
     transition-duration: .1s;
 }
+
 .emailPreview span {
     max-height: 20px;
     overflow-y: hidden;
 }
 
 .content {
-	display: inline-block;
+    display: inline-block;
 }
 
 .emailView {
@@ -44,7 +52,12 @@ body {
     padding: 10px;
     border-radius: 10px;
     height: calc(100% - 2*20px);
+    color: #2e0177;
+    font-weight: bold; /* Make text bold */
+    font-size: 16px; /* Set the font size to 16 pixels */
+
 }
+
 .emailCompose {
     width: calc(50% - 20px);
     border-radius: 10px;
@@ -52,11 +65,13 @@ body {
     position: absolute;
     top: 10px;
     right: 10px; 
+    background-color: #9BBFF4;
     border: 1px solid black;
     font-family: Open Sans, Arial, sans-serif;
     resize: none;
     padding: 5px;
 }
+
 .emailCompose:focus {
     outline: none;
 }
@@ -70,10 +85,13 @@ body {
 	right: 0px;
 	width: 65%;
 	height: 100%;
-	background-color: white;
+	background-color: #A7CDF2;
 	padding: 10px;
 	border: 1px solid black;
 	border-radius: 15px;
+    p {
+        color: red;
+    }
 }
 
 .close {
@@ -89,6 +107,7 @@ body {
 	font-size: 1.2em;
 	transition-duration: .1s;
 }
+
 .close:hover {
     background: grey;
     transition-duration: .1s;
