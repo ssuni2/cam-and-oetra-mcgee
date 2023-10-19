@@ -26,8 +26,8 @@ body {
     cursor: pointer;
     transition-duration: .1s;
     padding-top: 5px;
-    color: #ffffff
-    background-color: #f0f0f0; /* Set background color */
+    color: #ffffff;
+    background-color: #217892; /* Set background color */
     /* background-image: url('your-image-url.jpg'); Set background image */
 
 }
@@ -52,7 +52,9 @@ body {
     padding: 10px;
     border-radius: 10px;
     height: calc(100% - 2*20px);
-        color: #c72323
+    color: #315718;
+    font-weight: bold; /* Make text bold */
+    font-size: 16px; /* Set the font size to 16 pixels */
 
 }
 
