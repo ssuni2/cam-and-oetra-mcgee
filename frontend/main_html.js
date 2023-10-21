@@ -30,15 +30,59 @@ function addEmail(from, date, subject, content) {
   emails.insertBefore(el, emails.querySelector(".emailPreview")?.parentElement);
 }
 
-addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("company@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("sponsorship@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("cam_and_petra_fan@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("top_sponsor@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("fanmail@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("john_smith@mac.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("jane_smith@yahoo.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
 
+const followup_text = `
+Looks amazing! Thank you for reaching out.
+
+We are a highly covered tech / lifestyle / gaming creator, and a partnered YouTuber with millions of weekly views and media coverage. We have a massive IG and TikTok following too.
+
+We would love to work with you. 
+
+Can we discuss rates? 
+
+We can do a post to:
+@CamXPetra YouTube (165k Subs)
+@CamXPetra TikTok (270k Followers)
+@CamXPetra IG (130k Followers)
+@PetraXCam IG (75k Followers)
+@Gamrtalk IG Photo (213k Followers)
+
+Plus:
+- Link on our website
+- Content usage rights
+- Long form video (Extra cost)
+`;
+
+const long_text = `
+We actually have some ideas for content that I think would complement your product perfectly! 
+
+If you are not already aware, we own several pages and have more than 1M ifetime followers, netting us millions of views from our loyal community every week. We also have some of the most recognizable gaming and tech setups on the internet. We have worked with many top-end brands in the past, and you can learn more about us on our websites CamXPetra.com, and GamrTalk.com. 
+
+I would love to work around your needs and find the best ways to push your product to my audience. You can find us on TikTok / YouTube under CamXPetra, and on Instagram under PetraXCam and CamXPetra. (additional Twitter and social media links can be found on our respective websites as well.) 
+
+We offer several services including (But Not Limited To):
+
+- Original video and photo content creation with your product/service. Filmed in HD and highly optimized to go viral. Edited extensively for best results. 
+- Website link shares across stories and our link in bio. Duration is negotiable. 
+- Rights to reuse our content on your own social media and in marketing. (UGC is available too!)
+- Themed product giveaways through our network GamrTalk, which drives engagement and follows back to your brand account. 
+- Product / service testimonials and reviews.
+
+All of my services come with a guarantee of quality. Any advertising we do comes paired with extensive exposure for your brand. Products and services get promoted alongside our top-of-the-line setups and brands. We are really excited about the idea of working together! 
+
+Please let me know how you would like to proceed. If you have something specific in mind, feel free to make us an offer!
+
+Best Regards, 
+Cam
+`;
 
 let emailWindow = null;
 function createEmailWindow(el) {
@@ -78,13 +122,13 @@ function createEmailWindow(el) {
 
   let generateFunctions = {
     short() {
-      composeBox.value = "<Short generated response>";
+      composeBox.value = "Hi! This is CamXPetra. We would love to collaborate with you if this is something you are interested in? We are a partnered YouTuber with over 1M lifetime follows across all of our social media. Our videos and shorts get millions of views per week. Let me know if this is something we can discuss. Thank you!";
     },
     long() {
-      composeBox.value = "<Long generated response>";
+      composeBox.value = long_text;
     },
     followup() {
-      composeBox.value = "<Generated followup response>";
+      composeBox.value = followup_text;
     },
     writeOwn() {},
   };

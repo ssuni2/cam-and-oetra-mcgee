@@ -29,7 +29,9 @@ body {
     color: #ffffff;
     background-color: #217892; /* Set background color */
     /* background-image: url('your-image-url.jpg'); Set background image */
-
+    overflow: hidden; /* Hide overflowing content */
+    white-space: nowrap; /* Prevent text from wrapping */
+    text-overflow: ellipsis;
 }
 
 .emailPreview:hover {
@@ -53,6 +55,7 @@ body {
     border-radius: 10px;
     height: calc(100% - 2*20px);
     color: #2e0177;
+    /* color: white; */
     font-weight: bold; /* Make text bold */
     font-size: 16px; /* Set the font size to 16 pixels */
 
