@@ -58,8 +58,7 @@ function createEmailWindow(el) {
     <button class="overlay long">Long response</button>
     <button class="overlay followup">Followup response</button>
     <button class="overlay writeOwn">Write my own response</button>
-    <button class="send">Send</button>
-      <button type="button" onclick="sendEmail()">Send Email</button>
+    <button class="send" disabled>Send</button>
     <button class="close">&#10006</button>
   `;
 
@@ -95,6 +94,7 @@ function createEmailWindow(el) {
       div.querySelectorAll(".overlay").forEach(el => div.removeChild(el));
       composeBox.focus();
       generateFunctions[el.className.split(" ").filter(name => ["short", "long", "followup", "writeOwn"].includes(name))[0]]();
+      div.querySelector(".send").disabled = false;
     });
   });
 
@@ -107,5 +107,21 @@ function createEmailWindow(el) {
     emailWindow = null;
   }
 
+  div.querySelector(".send").addEventListener("click", function() {
+    sendEmail(sender, "Re: " + subject, composeBox.value);
+  });
+
   div.querySelector(".close").onclick = remove;
+}
+
+function sendEmail(to, subject, content) {
+  fetch("/send", {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify({
+      content, to, subject,
+    }),
+  }).then(res => res.json()).then(console.log);
 }

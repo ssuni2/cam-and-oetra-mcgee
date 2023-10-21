@@ -2,6 +2,7 @@
 
 body {
     font-family: Open Sans, Arial, sans-serif;
+    background-color: #477CE3;
 }
 
 #emails {
@@ -27,13 +28,11 @@ body {
     transition-duration: .1s;
     padding-top: 5px;
     color: #ffffff;
-    background-color: #217892; /* Set background color */
-    /* background-image: url('your-image-url.jpg'); Set background image */
-
+    background-color: #217892; 
 }
 
 .emailPreview:hover {
-    background: lightgrey;
+    background: #2f89a4;
     transition-duration: .1s;
 }
 
@@ -154,4 +153,8 @@ body {
 }
 .overlay.writeOwn {
     top: calc((100% - 2*20px - 30px - 10px) * 0.8);
+}
+
+button:disabled, button:disabled:hover {
+    cursor: not-allowed;
 }
