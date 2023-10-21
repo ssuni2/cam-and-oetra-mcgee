@@ -5,6 +5,12 @@ body {
     background-color: #477CE3;
 }
 
+hr {
+	height: 1px;
+	border: none;
+	background: grey;
+}
+
 #emails {
     position: fixed;
     left: 0%;
@@ -31,7 +37,7 @@ body {
     background-color: #217892; 
 }
 
-.emailPreview:hover {
+.emailPreview:hover:not(:has(.markasread:hover)) {
     background: #2f89a4;
     transition-duration: .1s;
 }
@@ -39,6 +45,17 @@ body {
 .emailPreview span {
     max-height: 20px;
     overflow-y: hidden;
+}
+
+.emailPreview .markasread {
+	right: 4%;
+	position: absolute;
+	border-radius: 10px;
+	height: 20px;
+	border: none;
+	width: 20px;
+	cursor: pointer;
+    background: lightgrey;
 }
 
 .content {
@@ -107,7 +124,7 @@ body {
 	transition-duration: .1s;
 }
 
-.close:hover {
+.close:hover, .emailPreview .markasread:hover {
     background: grey;
     transition-duration: .1s;
 }
@@ -157,4 +174,8 @@ body {
 
 button:disabled, button:disabled:hover {
     cursor: not-allowed;
+}
+.emailPreview.viewing {
+    cursor: default;
+    background: #2f89a4;
 }

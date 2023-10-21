@@ -17,6 +17,12 @@ def get_resource(resource):
 
   return send_from_directory("frontend", resource)
   
+@app.post("/markasread")
+def markasread():
+  json = request.get_json()
+  print("marking as read: " + json["id"])
+  return {"success": True}
+
 
 @app.post("/send")
 def send_email_api():

@@ -1,7 +1,8 @@
-function emailElement(from, date, subject, content) {
+function emailElement(from, date, subject, content, emailId) {
   let div = document.createElement("div");
   div.innerHTML = `
   <div class="emailPreview">
+    <button class="markasread">&#10006</button>
     <span class="from"></span><br>
     <span class="subject"></span>
     <hr>
@@ -10,34 +11,59 @@ function emailElement(from, date, subject, content) {
   div.querySelector(".from").innerText = from;
   div.querySelector(".subject").innerText = subject;
   div.querySelector(".content").innerText = content;
+  div.setAttribute("emailId", emailId);
   return div;
 }
 
-function addEmail(from, date, subject, content) {
-  let el = emailElement(from, date, subject, content);
-  el.addEventListener("click", function () {
-    // Close existing email window if open
-    if (emailWindow) {
-      document.body.classList.remove("has-modal");
-      document.body.removeChild(emailWindow);
-      emailWindow = null;
-    }
+function addEmail(from, date, subject, content, emailId) {
+  let el = emailElement(from, date, subject, content, emailId);
+  el.addEventListener("click", function (event) {
+    if (!event.target.className.includes("markasread")) {
+      // Close existing email window if open
+      if (emailWindow) {
+        document.body.classList.remove("has-modal");
+        document.body.removeChild(emailWindow);
+        emailWindow = null;
+        document.querySelectorAll(".emailPreview.viewing").forEach(el => el.classList.remove("viewing"));
+      }
 
-    createEmailWindow(el);
+      createEmailWindow(el);
+      el.querySelector(".emailPreview").classList.add("viewing");
+    } else {
+      if (confirm("Do you want to mark this email as read and close it?")) {
+        fetch("/markasread", {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+          body: JSON.stringify({
+            id: el.getAttribute("emailId"),
+          }),
+        }).then(res => res.json()).then(res => {
+          console.log(res);
+          el.parentElement.removeChild(el);
+          if (emailWindow && emailWindow.getAttribute("emailId") === el.getAttribute("emailId")) {
+            emailWindow.parentElement.removeChild(emailWindow);
+            emailWindow = null;
+            document.body.classList.remove("has-modal");
+          }
+        });
+      }
+    }
   });
 
   let emails = document.querySelector("#emails");
   emails.insertBefore(el, emails.querySelector(".emailPreview")?.parentElement);
 }
 
-addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
-addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating");
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating", 1);
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating", 2);
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating", 3);
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating", 4);
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating", 5);
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating", 6);
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating", 7);
+addEmail("serena.project.throwaway@gmail.com", "Today", "I love your content", "i love your content!\nI find it entertaining and invigorating", 8);
 
 
 let emailWindow = null;
@@ -61,6 +87,8 @@ function createEmailWindow(el) {
     <button class="send" disabled>Send</button>
     <button class="close">&#10006</button>
   `;
+
+  div.setAttribute("emailId", el.getAttribute("emailId"));
 
   let [sender, subject, content] = [
     el.querySelector(".from").innerText, el.querySelector(".subject").innerText, el.querySelector(".content").innerText
@@ -105,6 +133,7 @@ function createEmailWindow(el) {
     document.body.classList.remove("has-modal");
     document.body.removeChild(emailWindow);
     emailWindow = null;
+    document.querySelectorAll(".emailPreview.viewing").forEach(el => el.classList.remove("viewing"));
   }
 
   div.querySelector(".send").addEventListener("click", function() {
