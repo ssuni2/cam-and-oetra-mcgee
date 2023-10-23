@@ -2,12 +2,7 @@ function emailElement(from, date, subject, content, emailId) {
   let div = document.createElement("div");
   div.innerHTML = `
   <div class="emailPreview">
-    <button class="hamburger">•••</button>
-    <div class="hamburgermenu" style="visibility:hidden">
-      <a class="hamburgeroption markasread">Mark as read</a><hr>
-      <a class="hamburgeroption star">Star</a><hr>
-      <a class="hamburgeroption delete">Delete</a>
-    </div>
+    <button class="markasread">&#10006</button>
     <span class="from"></span><br>
     <span class="subject"></span>
     <hr>
@@ -20,20 +15,10 @@ function emailElement(from, date, subject, content, emailId) {
   return div;
 }
 
-function postHeaders(body) {
-  return {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    method: 'POST',
-    body: JSON.stringify(body),
-  };
-}
-
 function addEmail(from, date, subject, content, emailId) {
   let el = emailElement(from, date, subject, content, emailId);
   el.addEventListener("click", function (event) {
-    if (!event.target.className.includes("hamburger")) {
+    if (!event.target.className.includes("markasread")) {
       // Close existing email window if open
       if (emailWindow) {
         document.body.classList.remove("has-modal");
@@ -44,46 +29,28 @@ function addEmail(from, date, subject, content, emailId) {
 
       createEmailWindow(el);
       el.querySelector(".emailPreview").classList.add("viewing");
-    } else if (event.target === el.querySelector(".hamburger")) {
-      el.querySelector(".hamburgermenu").style.visibility = el.querySelector(".hamburgermenu").style.visibility === "visible" ? "hidden" : "visible";
     } else {
-      if (event.target.className.includes("markasread")) markasreadBtn();
-      if (event.target.className.includes("star")) starBtn();
-      if (event.target.className.includes("delete")) deleteBtn();
+      if (confirm("Do you want to mark this email as read and close it?")) {
+        fetch("/markasread", {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+          body: JSON.stringify({
+            id: el.getAttribute("emailId"),
+          }),
+        }).then(res => res.json()).then(res => {
+          console.log(res);
+          el.parentElement.removeChild(el);
+          if (emailWindow && emailWindow.getAttribute("emailId") === el.getAttribute("emailId")) {
+            emailWindow.parentElement.removeChild(emailWindow);
+            emailWindow = null;
+            document.body.classList.remove("has-modal");
+          }
+        });
+      }
     }
   });
-
-  function delete_email() {
-    el.parentElement.removeChild(el);
-    if (emailWindow && emailWindow.getAttribute("emailId") === el.getAttribute("emailId")) {
-      emailWindow.parentElement.removeChild(emailWindow);
-      emailWindow = null;
-      document.body.classList.remove("has-modal");
-    }
-  }
-
-  function markasreadBtn() {
-    if (confirm("Do you want to mark this email as read?")) {
-      fetch("/markasread", postHeaders({"id": el.getAttribute("emailId")})).then(res => res.json()).then(res => {
-        console.log(res);
-        delete_email();
-      });
-    }
-  }
-  function starBtn() {
-    alert("Im a star! ⭐️");
-    fetch("/star", postHeaders({"id": el.getAttribute("emailId")})).then(res => res.json()).then(res => {
-      console.log(res);
-    });
-  }
-  function deleteBtn() {
-    if (confirm("Do you want to delete this email?")) {
-      fetch("/delete", postHeaders({"id": el.getAttribute("emailId")})).then(res => res.json()).then(res => {
-        console.log(res);
-        delete_email();
-      });
-    }
-  }
 
   let emails = document.querySelector("#emails");
   emails.insertBefore(el, emails.querySelector(".emailPreview")?.parentElement);
