@@ -23,6 +23,18 @@ def markasread():
   print("marking as read: " + json["id"])
   return {"success": True}
 
+@app.post("/delete")
+def delete():
+  json = request.get_json()
+  print("deleting: " + json["id"])
+  return {"success": True}
+
+@app.post("/star")
+def star():
+  json = request.get_json()
+  print("starring: " + json["id"])
+  return {"success": True}
+
 
 @app.post("/send")
 def send_email_api():
