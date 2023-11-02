@@ -51,13 +51,14 @@ hr {
     overflow-y: hidden;
 }
 
-
 .emailPreview .hamburger {
 	right: 1%;
-=======
-.emailPreview .markasread {
-	right: 2%;
-
+	position: absolute;
+	border: none;
+	cursor: pointer;
+    background: none;
+    color: lightgrey;
+}
 
 .hamburgermenu {
     position: absolute;
