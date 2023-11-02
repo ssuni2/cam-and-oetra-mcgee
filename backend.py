@@ -5,6 +5,7 @@ app = Flask(__name__, template_folder="frontend")
 #instructions to run: `python3 backend.py`
 #navigate to http://127.0.0.1:8000/home
 
+
 @app.get("/home")
 def random():
   return render_template("main.html")
