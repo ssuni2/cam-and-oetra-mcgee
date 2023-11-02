@@ -9,7 +9,6 @@ print(df)
 
 
 
-
 def extract_features(text):
     features = {}
     for word in nltk.word_tokenize(text):
@@ -20,6 +19,7 @@ featuresets = [(extract_features(text), label) for (text, label) in data]
 
 train_set, test_set = featuresets[:800], featuresets[800:]
 
+# Naive Bayes for now 
 classifier = nltk.NaiveBayesClassifier.train(train_set)
 
 accuracy = nltk.classify.accuracy(classifier, test_set)
