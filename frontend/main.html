@@ -1,14 +1,16 @@
 <DOCTYPE html></DOCTYPE>
 <html lang="en">
+
 <head>
-  <link rel="stylesheet" type="text/css" href="/static/style.css">
-  <title>Home - email viewing and generation</title>
-  <meta charset = "UTF-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
   <div id="emails"></div>
-  <script src="/static/main_html.js"></script>
+
+  <script src="main_html.js"></script>
 </body>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +21,7 @@
       /* Set the background color */
       background-image: url('your-image-url.jpg');
       /* Set the background image */
-      background-repeat: no-repeat; 
+      background-repeat: no-repeat;
       /* Ensure the background image is not repeated */
       background-size: cover;
       /* Cover the entire viewport with the background image */
@@ -28,50 +30,5 @@
     }
   </style>
 </head>
-<head>
-  <title>File Attachment</title>
-  <style>
-      body {
-          position: relative;
-          margin: 0;
-          padding: 0;
-          height: 100vh;
-      }
-      h1 {
-          text-align: center;
-      }
-      #fileInput {
-          display: none;
-      }
-      #attachButton {
-          position: absolute;
-          bottom: 10px; /* Adjust this value to change the vertical position */
-          left: 10px; /* Adjust this value to change the horizontal position */
-      }
-  </style>
-</head>
-<body>
-  <h1>Attach a File</h1>
-  
-  <input type="file" id="fileInput">
-  <button id="attachButton">Attach File</button>
-  <script>
-      // Function to open the file input dialog when the button is clicked
-      document.getElementById('attachButton').addEventListener('click', function() {
-          document.getElementById('fileInput').click();
-      });
-      // Function to handle file selection
-      document.getElementById('fileInput').addEventListener('change', function() {
-          // Access the selected file(s)
-          const selectedFile = this.files[0]; // For single file selection
-          // You can now handle the selected file(s) using JavaScript, for example, to upload it to a server.
-          // You can use the FormData API to prepare the file for uploading.
-          // Example: Create a FormData object and append the selected file to it.
-          const formData = new FormData();
-          formData.append('file', selectedFile);
-          // Send the formData to your server using an AJAX request, for example.
-          // Reset the file input so the same file can be selected again
-          this.value = '';
-      });
-  </script>
+
 </html>
